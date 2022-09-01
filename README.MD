@@ -32,7 +32,7 @@ pip install -r ./requirements.txt
 ```
 
 ```
-python ./main
+python ./main.py
 ```
 
 Откройте ссылку в браузере
