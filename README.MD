@@ -31,6 +31,8 @@ pip install --upgrade pip
 pip install -r ./requirements.txt
 ```
 
+### Запуск
+
 ```
 python ./main.py
 ```
