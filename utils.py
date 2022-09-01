@@ -36,7 +36,8 @@ def get_non_closed_visits(Visit):
             {
                 'who_entered': visit.passcard.owner_name,
                 'entered_at': visit.entered_at,
-                'duration': format_duration(duration)
+                'duration': format_duration(duration),
+                'is_strange': visit.is_visit_long()
             }
         )
     return non_closed_visits
