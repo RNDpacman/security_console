@@ -14,6 +14,7 @@ class Passcard(models.Model):
 
 
 class Visit(models.Model):
+    TIME_LONG_VISIT = 60
     created_at = models.DateTimeField(auto_now=True)
     passcard = models.ForeignKey(Passcard, on_delete=models.CASCADE)
     entered_at = models.DateTimeField()
@@ -32,12 +33,12 @@ class Visit(models.Model):
             duration = self.leaved_at - self.entered_at
             minutes = duration.total_seconds() // 60
 
-            if minutes > 60: return True
+            if minutes > Visit.TIME_LONG_VISIT: return True
             else: return False
         else:
             duration = localtime() - self.entered_at
             minutes = duration.total_seconds() // 60
-            if minutes > 60: return True
+            if minutes > Visit.TIME_LONG_VISIT: return True
             else: return False
 
 
