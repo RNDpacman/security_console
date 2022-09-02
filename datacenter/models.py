@@ -21,26 +21,15 @@ class Visit(models.Model):
     leaved_at = models.DateTimeField(null=True)
 
     def get_duration(self):
-        if not self.leaved_at:
-            deltatime = localtime() - localtime(self.entered_at)
-            return int(deltatime.total_seconds())
-        else:
-            deltatime = localtime(self.leaved_at) - localtime(self.entered_at)
-            return int(deltatime.total_seconds())
+        deltatime = localtime(self.leaved_at) - localtime(self.entered_at)
+        return int(deltatime.total_seconds())
 
     def is_visit_long(self):
-        if self.leaved_at:
-            duration = self.leaved_at - self.entered_at
-            minutes = duration.total_seconds() // 60
-
-            if minutes > Visit.THOLD_LONG_VISIT: return True
-            else: return False
+        duration = self.get_duration() // 60
+        if duration > Visit.THOLD_LONG_VISIT:
+            return True
         else:
-            duration = localtime() - self.entered_at
-            minutes = duration.total_seconds() // 60
-            if minutes > Visit.THOLD_LONG_VISIT: return True
-            else: return False
-
+            return False
 
     def __str__(self):
         return '{user} entered at {entered} {leaved}'.format(
