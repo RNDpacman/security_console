@@ -1,4 +1,4 @@
-from datacenter.models import Passcard                                                                                                                             
+from datacenter.models import Passcard
 from datacenter.models import Visit
 
 
@@ -31,7 +31,7 @@ def get_passcard_visits(passcard):
 
 def get_non_closed_visits():
     '''
-    Return non clesed visits
+    Return non closed visits
     '''
     visits = Visit.objects.filter(leaved_at__isnull=True)
     non_closed_visits = []
