@@ -1,7 +1,6 @@
-from datacenter.models import Passcard
-from datacenter.models import Visit
-from django.shortcuts import render
 from django.shortcuts import get_list_or_404
+from django.shortcuts import render
+from datacenter.models import Passcard
 
 
 def active_passcards_view(request):

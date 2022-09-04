@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.timezone import localtime
 
+
 class Passcard(models.Model):
     is_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now=True)
@@ -14,7 +15,7 @@ class Passcard(models.Model):
 
 
 class Visit(models.Model):
-    THOLD_LONG_VISIT = 60
+    DURATION_NON_SUSPICIOUS_VISIT = 60
     created_at = models.DateTimeField(auto_now=True)
     passcard = models.ForeignKey(Passcard, on_delete=models.CASCADE)
     entered_at = models.DateTimeField()
@@ -26,10 +27,7 @@ class Visit(models.Model):
 
     def is_visit_long(self):
         duration = self.get_duration() // 60
-        if duration > Visit.THOLD_LONG_VISIT:
-            return True
-        else:
-            return False
+        return (duration > self.DURATION_NON_SUSPICIOUS_VISIT)
 
     def __str__(self):
         return '{user} entered at {entered} {leaved}'.format(
